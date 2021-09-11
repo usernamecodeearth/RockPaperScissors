@@ -1,5 +1,5 @@
-const userScore = 0;
-const compScore = 0;
+let userScore = 0;
+let compScore = 0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score"); 
 //DOM variable because of the underscore. added the span because it's from a span tag
@@ -18,16 +18,23 @@ function getComputerChoice(){
 }
 
 
-function win(){
-    console.log("You win");
+function win(userChoice, computerChoice){
+    userScore++;
+    userScore_span.innerHTML=userScore;
+    computerScore_span.innerHTML=compScore;
+    results_div.innerHTML=userChoice +" beats "+computerChoice+". You win!";
+
 }
 
-function lose(){
-    console.log("You lost");
+function lose(userChoice, computerChoice){
+    compScore++;
+    computerScore_span.innerHTML=compScore;
+    results_div.innerHTML=computerChoice +" beats "+userChoice+". You Lost!";
 }
 
-function tie(){
-    console.log("It's a tie");
+function draw(userChoice, computerChoice){
+    console.log("draw");
+    results_div.innerHTML="You both chose " +computerChoice+". It's a draw.";
 }
 
 function game(userChoice){
@@ -36,17 +43,17 @@ function game(userChoice){
         case "rs":
         case "pr":
         case "sp":
-           win();
+           win(userChoice, computerChoice);
         break;
         case "rp":
         case "ps":
         case "sr":
-            lose(); 
+            lose(userChoice, computerChoice); 
         break;
         case "rr":
         case "pp":
         case "ss":
-           tie();
+           draw(userChoice, computerChoice);
         break;
     }
 }
