@@ -30,21 +30,22 @@ function win(userChoice, computerChoice){
     computerScore_span.innerHTML=compScore;
     results_div.innerHTML=`${wordConvert(userChoice)} beats ${wordConvert(computerChoice)}. You win!`;
     document.getElementById(userChoice).classList.add('green-glow');
-    setTimeout(function() {document.getElementById(userChoice).classList.remove('green-glow')}, 200)
-}
+    setTimeout(()=> document.getElementById(userChoice).classList.remove('green-glow'), 200)
+} /* above is same as 
+    setTimeout(function() {document.getElementById(userChoice).classList.remove('green-glow')}, 200)*/
 
 function lose(userChoice, computerChoice){
     compScore++;
     computerScore_span.innerHTML=compScore;
     results_div.innerHTML=`${wordConvert(computerChoice)} beats ${wordConvert(userChoice)}. You Lost!`;
     document.getElementById(userChoice).classList.add('red-glow');
-    setTimeout(function() {document.getElementById(userChoice).classList.remove('red-glow')}, 200)
+    setTimeout(()=> document.getElementById(userChoice).classList.remove('red-glow'), 200)
 }
 
 function draw(userChoice, computerChoice){
     results_div.innerHTML=`You both chose ${wordConvert(computerChoice)}. It's a draw.`;
     document.getElementById(userChoice).classList.add('grey-glow');
-    setTimeout(function() {document.getElementById(userChoice).classList.remove('grey-glow')}, 200)
+    setTimeout(()=> document.getElementById(userChoice).classList.remove('grey-glow'), 200)
 }
 
 function game(userChoice){
@@ -83,15 +84,11 @@ function reset(){
 
 function main(){
 
-    rock_div.addEventListener('click', function(){
-        game("r");
-    })  
-    paper_div.addEventListener('click', function(){
-        game("p");
-    })  
-    scissors_div.addEventListener('click', function(){
-        game("s");
-    })   
+    rock_div.addEventListener('click', ()=> game("r"))  
+    paper_div.addEventListener('click', ()=>game("p"))  
+    scissors_div.addEventListener('click',()=>game("s"))   
 }
-
+/*scissors_div.addEventListener('click',()=>game("s")) is same as
+ scissors_div.addEventListener('click', function () {game("s"); })   
+*/
 main();
