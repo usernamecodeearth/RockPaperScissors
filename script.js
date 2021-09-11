@@ -17,27 +17,38 @@ function getComputerChoice(){
     return choices[randomNumber];
 }
 
+function wordConvert(letter){
+    if (letter === "r") return "Rock";
+    if (letter === "p") return "Paper";
+    return "Scissors"; //if none of the conditions are met, return scissors
+}
+
 
 function win(userChoice, computerChoice){
     userScore++;
     userScore_span.innerHTML=userScore;
     computerScore_span.innerHTML=compScore;
-    results_div.innerHTML=userChoice +" beats "+computerChoice+". You win!";
-
+    results_div.innerHTML=`${wordConvert(userChoice)} beats ${wordConvert(computerChoice)}. You win!`;
+    document.getElementById(userChoice).classList.add('green-glow');
+    setTimeout(function() {document.getElementById(userChoice).classList.remove('green-glow')}, 200)
 }
 
 function lose(userChoice, computerChoice){
     compScore++;
     computerScore_span.innerHTML=compScore;
-    results_div.innerHTML=computerChoice +" beats "+userChoice+". You Lost!";
+    results_div.innerHTML=`${wordConvert(computerChoice)} beats ${wordConvert(userChoice)}. You Lost!`;
+    document.getElementById(userChoice).classList.add('red-glow');
+    setTimeout(function() {document.getElementById(userChoice).classList.remove('red-glow')}, 200)
 }
 
 function draw(userChoice, computerChoice){
-    console.log("draw");
-    results_div.innerHTML="You both chose " +computerChoice+". It's a draw.";
+    results_div.innerHTML=`You both chose ${wordConvert(computerChoice)}. It's a draw.`;
+    document.getElementById(userChoice).classList.add('grey-glow');
+    setTimeout(function() {document.getElementById(userChoice).classList.remove('grey-glow')}, 200)
 }
 
 function game(userChoice){
+    
     const computerChoice = getComputerChoice();
     switch(userChoice + computerChoice){
         case "rs":
@@ -56,9 +67,18 @@ function game(userChoice){
            draw(userChoice, computerChoice);
         break;
     }
+    // if (compScore === 5 || userScore === 5){
+    //    reset();
+     
+    
+    
+
 }
 
- 
+function reset(){
+    userScore = 0;
+    compScore = 0;
+} 
 
 
 function main(){
